@@ -1,7 +1,7 @@
 <?php
 class SystemConfiguration {
     // General Settings
-    public static $base_url    = 'http://torklift-central-developer.local:5757/easyappointments/';
+    public static $base_url    = 'http://torklift-central-developer.local:5757/scheduler/';
     
     // Database Settings
     public static $db_host     = 'localhost';
