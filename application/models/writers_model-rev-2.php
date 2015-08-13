@@ -385,21 +385,21 @@ class Writers_Model extends CI_Model {
         
         $writers = $this->db->get()->result_array();
         
-        // Include each provider services and settings. 8/13/15 Do NOT enable Services. CL****
-        foreach($writers as &$writer) {
-            // // Services
-            // $services = $this->db->get_where('ea_services_writers', 
-            //         array('id_users' => $writer['id']))->result_array();
-            // $writer['services'] = array();
-            // foreach($services as $service) {
-            //     $writer['services'][] = $service['id_services'];
-            // }
+        // Include each provider services and settings.
+        // foreach($writers as &$writer) {
+        //     // Services
+        //     // $services = $this->db->get_where('ea_services_writers', 
+        //     //         array('id_users' => $writer['id']))->result_array();
+        //     // $writer['services'] = array();
+        //     // foreach($services as $service) {
+        //     //     $writer['services'][] = $service['id_services'];
+        //     // }
             
-            // Settings
-            $writer['settings'] = $this->db->get_where('ea_user_settings', 
-                    array('id_users' => $writer['id']))->row_array();
-            unset($writer['settings']['id_users']);
-        }
+        //     // Settings
+        //     $writer['settings'] = $this->db->get_where('ea_user_settings', 
+        //             array('id_users' => $writer['id']))->row_array();
+        //     unset($writer['settings']['id_users']);
+        // }
         
         // Return provider records.
         return $writers;

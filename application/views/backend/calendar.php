@@ -13,13 +13,13 @@
 <script type="text/javascript">    
     var GlobalVariables = {
         'availableProviders'    : <?php echo json_encode($available_providers); ?>,
-        'availableWriters'    : <?php echo json_encode($available_services); ?>,
+        'availableWriters'      : <?php echo json_encode($available_writers); ?>,
         'availableServices'     : <?php echo json_encode($available_services); ?>,
         'baseUrl'               : <?php echo '"' . $base_url . '"'; ?>,
         'bookAdvanceTimeout'    : <?php echo $book_advance_timeout; ?>,
         'editAppointment'       : <?php echo json_encode($edit_appointment); ?>,
         'customers'             : <?php echo json_encode($customers); ?>,
-        'writerProviders'    : <?php echo json_encode($writer_providers); ?>,
+        'writerProviders'       : <?php echo json_encode($writer_providers); ?>,
         'user'                  : {
             'id'        : <?php echo $user_id; ?>,
             'email'     : <?php echo '"' . $user_email . '"'; ?>,

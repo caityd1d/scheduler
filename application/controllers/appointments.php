@@ -203,7 +203,7 @@ class Appointments extends CI_Controller {
                 $view = array(
                     'appointment_data'  => $appointment,
                     'provider_data'     => $provider,
-                    'writer_data'     => $writer,
+                    'writer_data'       => $writer,
                     'service_data'      => $service,
                     'company_name'      => $company_settings['company_name']
                 );
@@ -484,6 +484,7 @@ class Appointments extends CI_Controller {
             $exclude_appointments = array()) {
         $this->load->model('appointments_model');
         $this->load->model('providers_model');
+        $this->load->model('writers_model');
         
         // Get the provider's working plan and reserved appointments.        
         $working_plan = json_decode($this->providers_model->get_setting('working_plan', $provider_id), true);

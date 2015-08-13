@@ -44,6 +44,7 @@ class Backend extends CI_Controller {
         $view['book_advance_timeout'] = $this->settings_model->get_setting('book_advance_timeout');
         $view['company_name'] = $this->settings_model->get_setting('company_name');
         $view['available_providers'] = $this->providers_model->get_available_providers();
+        $view['available_writers'] = $this->writers_model->get_available_writers();
         $view['available_services'] = $this->services_model->get_available_services();
         $view['customers'] = $this->customers_model->get_batch();
         $this->setUserData($view);
