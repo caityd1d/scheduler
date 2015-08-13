@@ -43,6 +43,7 @@ class Backend_api extends CI_Controller {
             $this->load->model('providers_model');
             $this->load->model('services_model');
             $this->load->model('customers_model');
+            $this->load->model('writers_model');
             
             if ($_POST['filter_type'] == FILTER_TYPE_PROVIDER) {
                 $where_id = 'id_users_provider';
@@ -64,6 +65,7 @@ class Backend_api extends CI_Controller {
                 $appointment['provider'] = $this->providers_model->get_row($appointment['id_users_provider']);
                 $appointment['service'] = $this->services_model->get_row($appointment['id_services']);
                 $appointment['customer'] = $this->customers_model->get_row($appointment['id_users_customer']);
+                $appointment['writer'] = $this->writers_model->get_row($appointment['id_users_writer']);
             }
             
             // Get unavailable periods (only for provider).
@@ -142,6 +144,7 @@ class Backend_api extends CI_Controller {
             $appointment = $this->appointments_model->get_row($appointment['id']);
             $provider = $this->providers_model->get_row($appointment['id_users_provider']);
             $customer = $this->customers_model->get_row($appointment['id_users_customer']);
+            $writer = $this->writers_model->get_row($appointment['id_users_writer']);
             $service = $this->services_model->get_row($appointment['id_services']);
             
             $company_settings = array(
@@ -256,12 +259,14 @@ class Backend_api extends CI_Controller {
             // :: STORE APPOINTMENT DATA FOR LATER USE IN THIS METHOD
             $this->load->model('appointments_model');
             $this->load->model('providers_model');
+            $this->load->model('writers_model');
             $this->load->model('customers_model');
             $this->load->model('services_model');
             $this->load->model('settings_model');
 
             $appointment = $this->appointments_model->get_row($_POST['appointment_id']);
             $provider = $this->providers_model->get_row($appointment['id_users_provider']);
+            $provider = $this->providers_model->get_row($appointment['id_users_writer']);
             $customer = $this->customers_model->get_row($appointment['id_users_customer']);
             $service = $this->services_model->get_row($appointment['id_services']);
 
@@ -376,6 +381,7 @@ class Backend_api extends CI_Controller {
             $this->load->model('appointments_model');
             $this->load->model('services_model');
             $this->load->model('providers_model');
+            $this->load->model('writers_model');
 	    	$this->load->model('customers_model');
             
 	    	$key = mysql_real_escape_string($_POST['key']); 
@@ -400,6 +406,8 @@ class Backend_api extends CI_Controller {
                             ->get_row($appointment['id_services']);
                     $appointment['provider'] = $this->providers_model
                             ->get_row($appointment['id_users_provider']);
+                    $appointment['writer'] = $this->writers_model
+                            ->get_row($appointment['id_users_writer']);
                 }
                 
                 $customer['appointments'] = $appointments;

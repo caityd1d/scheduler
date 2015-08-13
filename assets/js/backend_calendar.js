@@ -7,6 +7,7 @@ var BackendCalendar = {
     // :: CONSTANTS
     FILTER_TYPE_PROVIDER: 'provider',
     FILTER_TYPE_SERVICE: 'service',
+    FILTER_TYPE_WRITER: 'writer',
     
     // :: VALIABLES
     lastFocusedEventData: undefined, // Contain event data for later use.
@@ -1556,6 +1557,10 @@ var BackendCalendar = {
                     '<strong>' + EALang['customer'] + '</strong> ' 
                         + event.data['customer']['first_name'] + ' ' 
                         + event.data['customer']['last_name'] 
+                        + '<br>' +
+                    '<strong>' + 'Writer' + '</strong> ' 
+                        + event.data['writer']['first_name'] + ' ' 
+                        + event.data['writer']['last_name'] 
                         + '<hr>' +
                     '<center>' + 
                         '<button class="edit-popover btn btn-primary ' + displayEdit + '">' + EALang['edit'] + '</button>' +

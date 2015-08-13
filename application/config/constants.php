@@ -52,6 +52,7 @@ define('DB_SLUG_WRITER', 'writer');
 
 define('FILTER_TYPE_PROVIDER', 'provider');
 define('FILTER_TYPE_SERVICE', 'service');
+define('FILTER_TYPE_WRITER', 'writer');
 
 define('AJAX_SUCCESS', 'SUCCESS');
 define('AJAX_FAILURE', 'FAILURE');
