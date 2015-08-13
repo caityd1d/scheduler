@@ -13,7 +13,7 @@
 <script type="text/javascript">    
     var GlobalVariables = {
         'availableProviders'    : <?php echo json_encode($available_providers); ?>,
-        'availableProviders'    : <?php echo json_encode($available_providers); ?>,
+        'availableWriters'    : <?php echo json_encode($available_services); ?>,
         'availableServices'     : <?php echo json_encode($available_services); ?>,
         'baseUrl'               : <?php echo '"' . $base_url . '"'; ?>,
         'bookAdvanceTimeout'    : <?php echo $book_advance_timeout; ?>,

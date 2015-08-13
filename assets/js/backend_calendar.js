@@ -940,6 +940,30 @@ var BackendCalendar = {
                 });
             });
         });
+
+        /**
+         * Event: Selected Service "Change"
+         * 
+         * When the user clicks on a service, its available writers should 
+         * become visible. 
+         */
+        $('#select-service').change(function() {
+            var sid = $('#select-service').val();
+            $('#select-writer').empty();
+
+            $.each(GlobalVariables.availableWriters, function(indexWriter, writer) {
+                $.each(writer.services, function(indexService, serviceId) {
+                    // If the current writer is able to provide the selected service,
+                    // add him to the listbox. 
+                    if (serviceId == sid) { 
+                        var optionHtml = '<option value="' + writer['id'] + '">' 
+                                + writer['first_name']  + ' ' + writer['last_name'] 
+                                + '</option>';
+                        $('#select-writer').append(optionHtml);
+                    }
+                });
+            });
+        });
         
         /**
          * Event: Enter New Customer Button "Click"
@@ -1846,7 +1870,7 @@ var BackendCalendar = {
 
         // Fill the writers listbox with and then select the user's writer.
         $dialog.find('#select-writer').empty();
-        $.each(GlobalVariables.availableProviders, function(index, writer) {
+        $.each(GlobalVariables.availableWriters, function(index, writer) {
             // var canProvideService = false; 
 
             // $.each(writer['services'], function(index, serviceId) {

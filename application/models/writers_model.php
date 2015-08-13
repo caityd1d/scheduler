@@ -387,13 +387,13 @@ class Writers_Model extends CI_Model {
         
         // Include each provider services and settings.
         foreach($writers as &$writer) {
-            // // Services
-            // $services = $this->db->get_where('ea_services_writers', 
-            //         array('id_users' => $writer['id']))->result_array();
-            // $writer['services'] = array();
-            // foreach($services as $service) {
-            //     $writer['services'][] = $service['id_services'];
-            // }
+            // Services
+            $services = $this->db->get_where('ea_services_writers', 
+                    array('id_users' => $writer['id']))->result_array();
+            $writer['services'] = array();
+            foreach($services as $service) {
+                $writer['services'][] = $service['id_services'];
+            }
             
             // Settings
             $writer['settings'] = $this->db->get_where('ea_user_settings', 
