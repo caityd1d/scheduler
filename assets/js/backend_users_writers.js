@@ -3,16 +3,16 @@
  * tab event handlers. By deviding the backend/users tab functionality into separate files
  * it is easier to maintain the code.
  * 
- * @class writersHelper
+ * @class WritersHelper
  */
-var writersHelper = function() {
+var WritersHelper = function() {
     this.filterResults = {}; // Store the results for later use.
 };
 
 /**
  * Bind the event handlers for the backend/users "writers" tab.
  */
-writersHelper.prototype.bindEventHandlers = function() {
+WritersHelper.prototype.bindEventHandlers = function() {
     /**
      * Event: Filter writers Form "Submit"
      * 
@@ -174,7 +174,7 @@ writersHelper.prototype.bindEventHandlers = function() {
  * @param {object} writer Contains the admin record data. If an 'id' value is provided
  * then the update operation is going to be executed.
  */
-writersHelper.prototype.save = function(writer) {
+WritersHelper.prototype.save = function(writer) {
     ////////////////////////////////////////////////////
     //console.log('writer data to save:', writer);
     ////////////////////////////////////////////////////
@@ -199,7 +199,7 @@ writersHelper.prototype.save = function(writer) {
  * 
  * @param {int} id Record id to be deleted. 
  */
-writersHelper.prototype.delete = function(id) {
+WritersHelper.prototype.delete = function(id) {
     var postUrl = GlobalVariables.baseUrl + 'backend_api/ajax_delete_writer';
     var postData = { 'writer_id': id };
     
@@ -220,7 +220,7 @@ writersHelper.prototype.delete = function(id) {
  * @param {object} writer Contains the admin data to be validated.
  * @returns {bool} Returns the validation result.
  */
-writersHelper.prototype.validate = function(writer) {
+WritersHelper.prototype.validate = function(writer) {
     $('#writers .required').css('border', '');
     $('#writer-password, #writer-password-confirm').css('border', '');
     
@@ -273,7 +273,7 @@ writersHelper.prototype.validate = function(writer) {
 /**
  * Resets the admin tab form back to its initial state. 
  */
-writersHelper.prototype.resetForm = function() {
+WritersHelper.prototype.resetForm = function() {
     $('#writers .details').find('input, textarea').val('');
     $('#writers .add-edit-delete-group').show();
     $('#writers .save-cancel-group').hide();
@@ -297,7 +297,7 @@ writersHelper.prototype.resetForm = function() {
  * 
  * @param {object} writer Contains the writer record data.
  */
-writersHelper.prototype.display = function(writer) {
+WritersHelper.prototype.display = function(writer) {
     $('#writer-id').val(writer.id);
     $('#writer-first-name').val(writer.first_name);
     $('#writer-last-name').val(writer.last_name);
@@ -335,7 +335,7 @@ writersHelper.prototype.display = function(writer) {
  * selected in the filter results (only selected, not displayed).
  * @param {bool} display (OPTIONAL = false)
  */
-writersHelper.prototype.filter = function(key, selectId, display) {
+WritersHelper.prototype.filter = function(key, selectId, display) {
     if (display == undefined) display = false;
     
     var postUrl = GlobalVariables.baseUrl + 'backend_api/ajax_filter_writers';
@@ -353,7 +353,7 @@ writersHelper.prototype.filter = function(key, selectId, display) {
         $('#filter-writers .results').data('jsp').destroy();
         $('#filter-writers .results').html('');
         $.each(response, function(index, writer) {
-            var html = writersHelper.prototype.getFilterHtml(writer);
+            var html = WritersHelper.prototype.getFilterHtml(writer);
             $('#filter-writers .results').append(html);
         });
         $('#filter-writers .results').jScrollPane({ mouseWheelSpeed: 70 });
@@ -374,7 +374,7 @@ writersHelper.prototype.filter = function(key, selectId, display) {
  * @param {object} writer Contains the writer record data.
  * @returns {string} The html code that represents the record on the filter results list.
  */
-writersHelper.prototype.getFilterHtml = function(writer) {
+WritersHelper.prototype.getFilterHtml = function(writer) {
     var name = writer.first_name + ' ' + writer.last_name;
     var info = writer.email;
     info = (writer.mobile_number != '' && writer.mobile_number != null)
@@ -399,7 +399,7 @@ writersHelper.prototype.getFilterHtml = function(writer) {
  * @param {bool} display (OPTIONAL = false) If true then the method will display the record
  * on the form.
  */
-writersHelper.prototype.select = function(id, display) {
+WritersHelper.prototype.select = function(id, display) {
     if (display == undefined) display = false;
     
     $('#filter-writers .selected-row').removeClass('selected-row');

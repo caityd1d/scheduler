@@ -110,7 +110,9 @@ var BackendCalendar = {
             optgroupHtml += '</optgroup>';
             $('#select-filter-item').append(optgroupHtml);
         }
-            
+
+        // //CL 8/13/15 -- commented out bits remove list of services from calendar drop down
+
         if (GlobalVariables.availableServices.length > 0) {
             // optgroupHtml = '<optgroup label="' + EALang['services'] + '" type="services-group">';
             // $.each(GlobalVariables.availableServices, function(index, service) {
@@ -1840,6 +1842,27 @@ var BackendCalendar = {
                 $dialog.find('#select-provider').append(option);
             }
         });
+
+
+        // Fill the writers listbox with and then select the user's writer.
+        $dialog.find('#select-writer').empty();
+        $.each(GlobalVariables.availableProviders, function(index, writer) {
+            // var canProvideService = false; 
+
+            // $.each(writer['services'], function(index, serviceId) {
+            //     if (serviceId == $dialog.find('#select-service').val()) {
+            //         canProvideService = true;
+            //         return false;
+            //     }
+            // });
+
+            // if (canProvideService) { // Add the writer to the listbox.
+                var option = new Option(writer['first_name']  
+                       + ' ' + writer['last_name'], writer['id']);
+                $dialog.find('#select-writer').append(option);
+            // }
+        });
+
         
         // :: CLOSE EXISTING CUSTOMERS FILTER FRAME
         $('#existing-customers-list').slideUp('slow');

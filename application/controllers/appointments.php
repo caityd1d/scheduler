@@ -28,6 +28,7 @@ class Appointments extends CI_Controller {
         
         $this->load->model('appointments_model');
         $this->load->model('providers_model');
+        $this->load->model('writers_model');
         $this->load->model('services_model');
         $this->load->model('customers_model');
         $this->load->model('settings_model');
@@ -36,6 +37,7 @@ class Appointments extends CI_Controller {
             try {
                 $available_services  = $this->services_model->get_available_services();
                 $available_providers = $this->providers_model->get_available_providers();
+                $available_writers   = $this->writers_model->get_available_writers();
                 $company_name        = $this->settings_model->get_setting('company_name');
 
                 // If an appointment hash is provided then it means that the customer 
@@ -62,6 +64,7 @@ class Appointments extends CI_Controller {
 
                     $appointment = $results[0]; 
                     $provider = $this->providers_model->get_row($appointment['id_users_provider']);
+                    $writer   = $this->writers_model->get_row($appointment['id_users_writer']);
                     $customer = $this->customers_model->get_row($appointment['id_users_customer']);
                     
                 } else {
@@ -70,6 +73,7 @@ class Appointments extends CI_Controller {
                     $manage_mode        = FALSE;
                     $appointment   = array();
                     $provider      = array();
+                    $writer        = array();
                     $customer      = array();
                 }
 
@@ -77,6 +81,7 @@ class Appointments extends CI_Controller {
                 $view = array (
                     'available_services'    => $available_services,
                     'available_providers'   => $available_providers,
+                    'available_writers'     => $available_writers,
                     'company_name'          => $company_name,
                     'manage_mode'           => $manage_mode,
                     'appointment_data'      => $appointment,
@@ -110,6 +115,7 @@ class Appointments extends CI_Controller {
                 $appointment['hash'] = $this->appointments_model->get_value('hash', $appointment['id']);
                 
                 $provider = $this->providers_model->get_row($appointment['id_users_provider']);
+                $writer = $this->writers_model->get_row($appointment['id_users_writer']);
                 $service = $this->services_model->get_row($appointment['id_services']);
                 
                 $company_settings = array( 
@@ -180,12 +186,12 @@ class Appointments extends CI_Controller {
                                 . $appointment['hash'];
                     }
 
-                    $this->notifications->send_appointment_details($appointment, $provider, 
+                    $this->notifications->send_appointment_details($appointment, $provider, $writer,
                             $service, $customer,$company_settings, $customer_title, 
                             $customer_message, $customer_link, $customer['email']);
                     
                     if ($send_provider == TRUE) {
-                        $this->notifications->send_appointment_details($appointment, $provider, 
+                        $this->notifications->send_appointment_details($appointment, $provider, $writer,
                                 $service, $customer, $company_settings, $provider_title, 
                                 $provider_message, $provider_link, $provider['email']);
                     }
@@ -197,6 +203,7 @@ class Appointments extends CI_Controller {
                 $view = array(
                     'appointment_data'  => $appointment,
                     'provider_data'     => $provider,
+                    'writer_data'     => $writer,
                     'service_data'      => $service,
                     'company_name'      => $company_settings['company_name']
                 );
@@ -226,6 +233,7 @@ class Appointments extends CI_Controller {
         try {
             $this->load->model('appointments_model');
             $this->load->model('providers_model');
+            $this->load->model('writers_model');
             $this->load->model('customers_model');
             $this->load->model('services_model');
             $this->load->model('settings_model');
@@ -238,6 +246,7 @@ class Appointments extends CI_Controller {
             
             $appointment = $records[0];
             $provider = $this->providers_model->get_row($appointment['id_users_provider']);
+            $writer = $this->writers_model->get_row($appointment['id_users_writer']);
             $customer = $this->customers_model->get_row($appointment['id_users_customer']);
             $service = $this->services_model->get_row($appointment['id_services']);
             

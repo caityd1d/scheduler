@@ -73,10 +73,12 @@
         var GlobalVariables = {
             availableServices   : <?php echo json_encode($available_services); ?>,
             availableProviders  : <?php echo json_encode($available_providers); ?>,
+            availableWriters    : <?php echo json_encode($available_writers); ?>,
             baseUrl             : <?php echo '"' . $this->config->base_url() . '"'; ?>,
             manageMode          : <?php echo ($manage_mode) ? 'true' : 'false'; ?>,
             appointmentData     : <?php echo json_encode($appointment_data); ?>,
             providerData        : <?php echo json_encode($provider_data); ?>,
+            writerData          : <?php echo json_encode($writer_data); ?>,
             customerData        : <?php echo json_encode($customer_data); ?>,
         };
 
@@ -156,7 +158,7 @@
             ?>            
             <?php 
                 // ------------------------------------------------------
-                // SELECT SERVICE AND PROVIDER 
+                // SELECT SERVICE AND PROVIDER, WRITER
                 // ------------------------------------------------------ ?>
             <div id="wizard-frame-1" class="wizard-frame">                
                 <div class="frame-container">
@@ -227,6 +229,12 @@
                         </label>
                         
                         <select id="select-provider"></select>
+
+                        <label for="select-writer">
+                            <strong><?php echo $this->lang->line('select_writer'); ?></strong>
+                        </label>
+                        
+                        <select id="select-writer"></select>
                         
                         <div id="service-description" style="display:none;"></div>
                     </div>

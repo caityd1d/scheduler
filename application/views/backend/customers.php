@@ -7,7 +7,9 @@
 <script type="text/javascript">    
     var GlobalVariables = {
         'availableProviders': <?php echo json_encode($available_providers); ?>,
+        'availableWriters': <?php echo json_encode($available_writers); ?>,
         'availableServices': <?php echo json_encode($available_services); ?>,
+
         'baseUrl': <?php echo '"' . $base_url . '"'; ?>,
         'customers': <?php echo json_encode($customers); ?>,
         'user'                  : {

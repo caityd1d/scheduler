@@ -365,50 +365,6 @@ class Writers_Model extends CI_Model {
         return $batch;
     }
     
-/**
-     * CL**** Get the available system writers (all of them 8/13/15).
-     * 
-     * This method returns the available providers and the services that can 
-     * provide.
-     * 
-     * @return array Returns an array with the providers data.
-     * 
-     * @deprecated since version 0.5 - Use get_batch() instead.
-     */
-    public function get_available_writers() {
-        // Get provider records from database.
-        $this->db
-                ->select('ea_users.*')
-                ->from('ea_users')  
-                ->join('ea_roles', 'ea_roles.id = ea_users.id_roles', 'inner')
-                ->where('ea_roles.slug', DB_SLUG_WRITER);
-        
-        $writers = $this->db->get()->result_array();
-        
-        // Include each provider services and settings.
-        foreach($writers as &$writer) {
-            // // Services
-            // $services = $this->db->get_where('ea_services_writers', 
-            //         array('id_users' => $writer['id']))->result_array();
-            // $writer['services'] = array();
-            // foreach($services as $service) {
-            //     $writer['services'][] = $service['id_services'];
-            // }
-            
-            // Settings
-            $writer['settings'] = $this->db->get_where('ea_user_settings', 
-                    array('id_users' => $writer['id']))->row_array();
-            unset($writer['settings']['id_users']);
-        }
-        
-        // Return provider records.
-        return $writers;
-    }
-
-
-
-
-
     /**
      * Get the writer users role id. 
      * 

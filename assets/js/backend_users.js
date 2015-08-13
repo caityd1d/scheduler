@@ -10,7 +10,7 @@ var BackendUsers = {
     /**
      * Contains the current tab record methods for the page.
      * 
-     * @type AdminsHelper|ProvidersHelper|writersHelper
+     * @type AdminsHelper|ProvidersHelper|WritersHelper
      */
     helper: {},
             
@@ -97,7 +97,7 @@ var BackendUsers = {
                 BackendUsers.helper = new ProvidersHelper();
             } else if ($(this).hasClass('writers-tab')) { // display writers tab
                 $('#writers').show();
-                BackendUsers.helper = new writersHelper();
+                BackendUsers.helper = new WritersHelper();
                 
                 // Update the list with the all the available providers.
                 var postUrl = GlobalVariables.baseUrl + 'backend_api/ajax_filter_providers';
@@ -177,7 +177,7 @@ var BackendUsers = {
         
         // ------------------------------------------------------------------------
         
-        writersHelper.prototype.bindEventHandlers();
+        WritersHelper.prototype.bindEventHandlers();
         
         // ------------------------------------------------------------------------
     }
