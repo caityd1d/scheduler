@@ -178,6 +178,13 @@
                         <select id="select-provider" class="required span4"></select>
                     </div>
                 </div>
+
+                <div class="control-group">
+                    <label for="select-writer" class="control-label"><?php echo 'Writer' ?> *</label>
+                    <div class="controls">
+                        <select id="select-writer" class="required span4"></select>
+                    </div>
+                </div>
                 
                 <div class="control-group">
                     <label for="start-datetime" class="control-label"><?php echo $this->lang->line('start_date_time'); ?></label>

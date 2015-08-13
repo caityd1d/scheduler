@@ -49,6 +49,7 @@ class Appointments_Model extends CI_Model {
         if (!isset($appointment['start_datetime'])
                 || !isset($appointment['end_datetime'])
                 || !isset($appointment['id_users_provider'])
+                || !isset($appointment['id_users_writer'])
                 || !isset($appointment['id_users_customer'])
                 || !isset($appointment['id_services'])) {
             throw new Exception('Not all appointment field values ' 
@@ -59,6 +60,7 @@ class Appointments_Model extends CI_Model {
                 'start_datetime'    => $appointment['start_datetime'],
                 'end_datetime'      => $appointment['end_datetime'],
                 'id_users_provider' => $appointment['id_users_provider'],
+                'id_users_writer' => $appointment['id_users_writer'],
                 'id_users_customer' => $appointment['id_users_customer'],
                 'id_services'       => $appointment['id_services'],))
                 ->num_rows();
@@ -123,6 +125,7 @@ class Appointments_Model extends CI_Model {
             'start_datetime'    => $appointment['start_datetime'],
             'end_datetime'      => $appointment['end_datetime'],
             'id_users_provider' => $appointment['id_users_provider'],
+            'id_users_writer'   => $appointment['id_users_writer'],
             'id_users_customer' => $appointment['id_users_customer'],
             'id_services'       => $appointment['id_services']
         ));
@@ -176,6 +179,17 @@ class Appointments_Model extends CI_Model {
                 ->get()->num_rows();
         if ($num_rows == 0) {
             throw new Exception('Appointment provider id is invalid.');
+        }
+        // Check if the writer's id is valid. 
+        $num_rows = $this->db
+                ->select('*')
+                ->from('ea_users')
+                ->join('ea_roles', 'ea_roles.id = ea_users.id_roles', 'inner')
+                ->where('ea_users.id', $appointment['id_users_writer'])
+                ->where('ea_roles.slug', DB_SLUG_WRITER)
+                ->get()->num_rows();
+        if ($num_rows == 0) {
+            throw new Exception('Appointment writer id is invalid.');
         }
 
         if ($appointment['is_unavailable'] == FALSE) { 
@@ -332,6 +346,16 @@ class Appointments_Model extends CI_Model {
         
         if ($this->db->get_where('ea_users', $where_clause)->num_rows() == 0) {
             throw new Exception('Provider id was not found in database.');
+        }
+
+        // Validate writer record
+        $where_clause = array(
+            'id' => $unavailable['id_users_writer'],
+            'id_roles' => $this->db->get_where('ea_roles', array('slug' => DB_SLUG_WRITER))->row()->id
+        );
+        
+        if ($this->db->get_where('ea_users', $where_clause)->num_rows() == 0) {
+            throw new Exception('Writer id was not found in database.');
         }
         
         // Add record to database (insert or update).

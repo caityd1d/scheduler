@@ -169,6 +169,7 @@ var BackendCalendar = {
             $dialog.find('#appointment-id').val(appointment['id']);
             $dialog.find('#select-service').val(appointment['id_services']).change();
             $dialog.find('#select-provider').val(appointment['id_users_provider']);
+            $dialog.find('#select-writer').val(appointment['id_users_writer']);
 
             // Set the start and end datetime of the appointment.
             var startDatetime = Date.parseExact(appointment['start_datetime'],
@@ -350,6 +351,7 @@ var BackendCalendar = {
                 $dialog.find('#appointment-id').val(appointment['id']);
                 $dialog.find('#select-service').val(appointment['id_services']).trigger('change');
                 $dialog.find('#select-provider').val(appointment['id_users_provider']);
+                $dialog.find('#select-writer').val(appointment['id_users_writer']);
 
                 // Set the start and end datetime of the appointment.
                 var startDatetime = Date.parseExact(appointment['start_datetime'],
@@ -515,6 +517,7 @@ var BackendCalendar = {
             var appointment = {
                 'id_services': $dialog.find('#select-service').val(),
                 'id_users_provider': $dialog.find('#select-provider').val(),
+                'id_users_writer': $dialog.find('#select-writer').val(),
                 'start_datetime': startDatetime,
                 'end_datetime': endDatetime,
                 'notes': $dialog.find('#appointment-notes').val(),
