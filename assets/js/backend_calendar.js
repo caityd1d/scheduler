@@ -111,14 +111,14 @@ var BackendCalendar = {
         }
             
         if (GlobalVariables.availableServices.length > 0) {
-            optgroupHtml = '<optgroup label="' + EALang['services'] + '" type="services-group">';
-            $.each(GlobalVariables.availableServices, function(index, service) {
-                optgroupHtml += '<option value="' + service['id'] + '" ' + 
-                        'type="' + BackendCalendar.FILTER_TYPE_SERVICE + '">' + 
-                        service['name'] + '</option>';
-            });
-            optgroupHtml += '</optgroup>';
-            $('#select-filter-item').append(optgroupHtml);
+            // optgroupHtml = '<optgroup label="' + EALang['services'] + '" type="services-group">';
+            // $.each(GlobalVariables.availableServices, function(index, service) {
+            //     optgroupHtml += '<option value="' + service['id'] + '" ' + 
+            //             'type="' + BackendCalendar.FILTER_TYPE_SERVICE + '">' + 
+            //             service['name'] + '</option>';
+            // });
+            // optgroupHtml += '</optgroup>';
+            // $('#select-filter-item').append(optgroupHtml);
         }
         
         // Privileges Checks
